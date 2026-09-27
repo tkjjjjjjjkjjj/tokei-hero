@@ -188,3 +188,11 @@ h2 { margin: 2px 0 0; font-size: 24px; letter-spacing: .03em; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+
+
+/* Keep the three-column header aligned even when the home button is inactive. */
+.topbar .icon-button.hidden {
+  display: block !important;
+  visibility: hidden;
+  pointer-events: none;
+}
