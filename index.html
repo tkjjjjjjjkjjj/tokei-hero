@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#6c5ce7" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>とけいヒーロー！</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell" id="app">
+    <header class="topbar">
+      <button id="homeButton" class="icon-button hidden" type="button" aria-label="ホームにもどる">⌂</button>
+      <div class="brand" aria-label="とけいヒーロー">⏰ とけいヒーロー！</div>
+      <button id="soundButton" class="icon-button" type="button" aria-label="おとのオン・オフ">🔊</button>
+    </header>
+
+    <section id="homeScreen" class="screen home-screen active" aria-labelledby="homeTitle">
+      <div class="mascot-wrap" aria-hidden="true">
+        <div class="mascot">🦊</div>
+        <span class="spark s1">★</span><span class="spark s2">✦</span><span class="spark s3">●</span>
+      </div>
+      <h1 id="homeTitle">とけいを よめるかな？</h1>
+      <p class="lead">ながい はりと みじかい はりを みて、<br />ぴったりの じかんを えらぼう！</p>
+
+      <div class="level-grid" role="group" aria-label="むずかしさをえらぶ">
+        <button class="level-card" data-level="easy" type="button">
+          <span class="level-emoji">🌱</span>
+          <span class="level-name">やさしい</span>
+          <span class="level-desc">◯じ ぴったり</span>
+        </button>
+        <button class="level-card" data-level="medium" type="button">
+          <span class="level-emoji">🌟</span>
+          <span class="level-name">ふつう</span>
+          <span class="level-desc">◯じ・◯じ30ぷん</span>
+        </button>
+        <button class="level-card" data-level="challenge" type="button">
+          <span class="level-emoji">🚀</span>
+          <span class="level-name">チャレンジ</span>
+          <span class="level-desc">5ふん きざみ</span>
+        </button>
+      </div>
+
+      <div class="collection-card" aria-live="polite">
+        <div><span class="collection-label">あつめた シール</span><strong id="stickerCount">0 / 12</strong></div>
+        <div><span class="collection-label">ベスト コンボ</span><strong id="bestCombo">0</strong></div>
+      </div>
+      <button id="showStickersButton" class="text-button" type="button">🎁 シールちょうを みる</button>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen" aria-labelledby="questionText">
+      <div class="hud">
+        <div class="progress-wrap" aria-label="もんだいのすすみぐあい">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div class="combo-pill"><span aria-hidden="true">🔥</span> <strong id="comboText">0</strong> コンボ</div>
+      </div>
+
+      <div class="question-row">
+        <div>
+          <div id="roundLabel" class="round-label">1 / 6</div>
+          <h2 id="questionText">なんじ なんぷん？</h2>
+        </div>
+        <div id="scoreStars" class="score-stars" aria-label="ほし 0こ">☆ ☆ ☆</div>
+      </div>
+
+      <div id="clockCard" class="clock-card">
+        <svg id="clockSvg" viewBox="0 0 200 200" role="img" aria-label="もんだいのアナログどけい">
+          <circle class="clock-face" cx="100" cy="100" r="88"></circle>
+          <g id="tickMarks"></g>
+          <g class="clock-numbers" aria-hidden="true">
+            <text x="100" y="35">12</text><text x="166" y="105">3</text><text x="100" y="174">6</text><text x="34" y="105">9</text>
+          </g>
+          <line id="hourHand" class="hand hour-hand" x1="100" y1="105" x2="100" y2="62"></line>
+          <line id="minuteHand" class="hand minute-hand" x1="100" y1="108" x2="100" y2="36"></line>
+          <circle class="clock-pin" cx="100" cy="100" r="7"></circle>
+        </svg>
+        <div id="hintBubble" class="hint-bubble hidden" aria-live="polite"></div>
+      </div>
+
+      <div id="answerGrid" class="answer-grid" role="group" aria-label="こたえ"></div>
+      <div id="feedback" class="feedback" aria-live="assertive"></div>
+    </section>
+
+    <section id="resultScreen" class="screen result-screen" aria-labelledby="resultTitle">
+      <div id="resultBurst" class="result-burst" aria-hidden="true">🏆</div>
+      <h2 id="resultTitle">やったね！</h2>
+      <p id="resultMessage" class="result-message"></p>
+      <div class="result-score">
+        <span id="resultStars" class="big-stars">★★★</span>
+        <span id="resultAccuracy"></span>
+      </div>
+      <div id="rewardCard" class="reward-card">
+        <span class="reward-label">こんかいの ごほうび</span>
+        <span id="rewardSticker" class="reward-sticker">⭐</span>
+        <strong id="rewardName">キラキラぼし</strong>
+      </div>
+      <button id="againButton" class="primary-button" type="button">もう いっかい！</button>
+      <button id="changeLevelButton" class="secondary-button" type="button">むずかしさを かえる</button>
+    </section>
+
+    <section id="stickerScreen" class="screen sticker-screen" aria-labelledby="stickerTitle">
+      <h2 id="stickerTitle">🎁 シールちょう</h2>
+      <p class="lead small">あそぶたびに 1まい もらえるよ！</p>
+      <div id="stickerBook" class="sticker-book"></div>
+      <button id="stickerBackButton" class="primary-button" type="button">もどる</button>
+    </section>
+  </main>
+
+  <div id="celebrationLayer" class="celebration-layer" aria-hidden="true"></div>
+  <div id="flashLayer" class="flash-layer" aria-hidden="true"></div>
+  <script src="app.js"></script>
+</body>
+</html>
